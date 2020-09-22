@@ -29,6 +29,6 @@ jobs:
         TAG_REF: ${{ github.ref }}
       run: |
         tag=`echo ${TAG_REF}|awk -F/ '{print $3}'`
-        sed -i "s/1.0.1/${tag}/g" setup.py
+        sed -i "/VERSION =/ VERSION = '${tag}'" setup.py
         python setup.py sdist bdist_wheel
         twine upload --skip-existing dist/*
